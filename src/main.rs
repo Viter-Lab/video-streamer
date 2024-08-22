@@ -15,7 +15,7 @@ use libcamera::{
 
 // drm-fourcc does not have MJPEG type yet, construct it from raw fourcc identifier
 // const PIXEL_FORMAT_MJPEG: PixelFormat = PixelFormat::new(u32::from_le_bytes([b'M', b'J', b'P', b'G']), 0);
-const PIXEL_FORMAT_RGB888: PixelFormat = PixelFormat::new(DrmFourcc::Rgb888 as u32, 0);
+const PIXEL_FORMAT: PixelFormat = PixelFormat::new(DrmFourcc::Nv12 as u32, 0);
 
 fn main() {
     let filename = match std::env::args().nth(1) {
@@ -43,7 +43,7 @@ fn main() {
     // This will generate default configuration for each specified role
     let mut cfgs = cam.generate_configuration(&[StreamRole::VideoRecording]).unwrap();
 
-    cfgs.get_mut(0).unwrap().set_pixel_format(PIXEL_FORMAT_RGB888);
+    cfgs.get_mut(0).unwrap().set_pixel_format(PIXEL_FORMAT);
 
     println!("Generated config: {:#?}", cfgs);
 
@@ -56,7 +56,7 @@ fn main() {
     // Ensure that pixel format was unchanged
     assert_eq!(
         cfgs.get(0).unwrap().get_pixel_format(),
-        PIXEL_FORMAT_RGB888,
+        PIXEL_FORMAT,
         "RGB888 is not supported by the camera"
     );
 
