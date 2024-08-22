@@ -1,2 +1,3 @@
 # video-streamer
-Streaming video from RP camara to Network
+Streaming video from RP camera to Network
+
