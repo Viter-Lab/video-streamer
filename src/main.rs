@@ -1,5 +1,6 @@
 use std::{fs::OpenOptions, io::Write, process::exit, time::Duration};
 
+use drm_fourcc::DrmFourcc;
 use libcamera::{
     camera::CameraConfigurationStatus,
     camera_manager::CameraManager,
