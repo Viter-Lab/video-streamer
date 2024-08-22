@@ -42,7 +42,7 @@ fn main() {
     // This will generate default configuration for each specified role
     let mut cfgs = cam.generate_configuration(&[StreamRole::VideoRecording]).unwrap();
 
-    cfgs.get_mut(0).unwrap().set_pixel_format(PIXEL_FORMAT_MJPEG);
+    cfgs.get_mut(0).unwrap().set_pixel_format(PIXEL_FORMAT_RGB888);
 
     println!("Generated config: {:#?}", cfgs);
 
@@ -55,8 +55,8 @@ fn main() {
     // Ensure that pixel format was unchanged
     assert_eq!(
         cfgs.get(0).unwrap().get_pixel_format(),
-        PIXEL_FORMAT_MJPEG,
-        "MJPEG is not supported by the camera"
+        PIXEL_FORMAT_RGB888,
+        "RGB888 is not supported by the camera"
     );
 
     cam.configure(&mut cfgs).expect("Unable to configure camera");
